@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Valentine Invitation 💘</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ===== PAGE 1 (INVITATION) ===== */
+        #invitationPage {
+            background: linear-gradient(to bottom right, #e2a0bb, #dd6aa7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        img {
+            width: 250px;
+            transition: 0.5s;
+        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        /* ===== PAGE 2 (LETTER) ===== */
+        #letterPage {
+            display: none;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: #02131d;
+        }
+
+        .letter {
+            background: #f8c8dc;
+            width: 600px;
+            max-width: 90%;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            color: #803a5e;
+            line-height: 1.8;
+        }
+
+        .letter h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .letter p {
+            margin-bottom: 18px;
+        }
+
+        .back-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .back-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===== INVITATION PAGE ===== -->
+<div id="invitationPage">
+    <div class="container">
+        <img id="mainImage" src="qoobee-smile.gif" alt="Valentine GIF">
+        <h1 id="question">Will you be my Valentine? 💘</h1>
+
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+</div>
+
+<!-- ===== LETTER PAGE ===== -->
+<div id="letterPage">
+    <div class="letter">
+        <h2>Happy Valentine’s Day, bubby. 🤍</h2>
+
+        <p>
+        I just want you to know how much I love you. I love you so, so much —
+        more than I can even explain in words. You mean everything to me.
+        </p>
+
+        <p>
+        Please always take care of yourself, okay? I may not always be physically
+        there beside you, but I’m always on your side. I’ll always be by your side
+        no matter what — through your good days, your bad days, and everything in between.
+        </p>
+
+        <p>
+        Stay who you are. Don’t let anyone drag you down or make you feel less
+        than what you truly are. You’re amazing, you’re strong, and you deserve
+        all the love in the world. Never forget that.
+        </p>
+
+        <p>
+        It makes me a little sad that I’m not there to celebrate Valentine’s with you
+        right now. I wish I could hold you and spend this day with you.
+        But I promise, babawi ako when I’m near you. I’ll make it up to you,
+        and I’ll make it extra special.
+        </p>
+
+        <p>
+        Take care always, bubby. I love you so much.
+        I love you. I love you. 🤍
+        </p>
+
+        <button class="back-btn" onclick="goBack()">Close</button>
+    </div>
+</div>
+
+<script>
+    let noClicks = 0;
+
+    const phrases = [
+        "Why not, bubby?",
+        "Please reconsider, bubby.",
+        "We’d actually be really cute together.",
+        "Come on, bubby. Just say yes.",
+        "You’re breaking my heart a little.",
+        "At least think about it?",
+        "Okay… now I’m starting to feel sad."
+    ];
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const result = document.getElementById("result");
+    const mainImage = document.getElementById("mainImage");
+    const question = document.getElementById("question");
+
+    yesBtn.addEventListener("click", function () {
+        mainImage.style.width = "450px";
+        mainImage.src = "blow-horn-i-love-you.gif";
+        question.style.display = "none";
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+
+        result.innerHTML = `
+            <div style="font-size:32px; font-weight:bold; color:#803a5e;">
+                I knew your heart would choose mine. 💖
+            </div>
+
+            <div style="margin-top:40px;">
+                <h2 style="color:#7b2cbf;">💌 You have a letter</h2>
+
+                <button onclick="showLetter()" 
+                    style="
+                        font-size:18px;
+                        padding:12px 25px;
+                        background:#dc3545;
+                        color:white;
+                        border:none;
+                        border-radius:10px;
+                        cursor:pointer;
+                    ">
+                    Open My Letter 💌
+                </button>
+            </div>
+        `;
+    });
+
+    noBtn.addEventListener("click", function () {
+        if (noClicks < phrases.length) {
+            noBtn.innerText = phrases[noClicks];
+        }
+
+        noClicks++;
+        let newSize = 16 + (noClicks * 12);
+        yesBtn.style.fontSize = newSize + "px";
+    });
+
+    function showLetter() {
+        document.getElementById("invitationPage").style.display = "none";
+        document.getElementById("letterPage").style.display = "flex";
+    }
+
+    function goBack() {
+        document.getElementById("letterPage").style.display = "none";
+        document.getElementById("invitationPage").style.display = "flex";
+    }
+</script>
+
+</body>
+</html>
